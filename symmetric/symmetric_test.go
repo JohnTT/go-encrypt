@@ -6,8 +6,12 @@ import (
 	"testing"
 )
 
+// TestDecrypt verifies the encryption and decryption process of CryptoManager.
+// It checks that:
+// - Data can be encrypted and marshaled to JSON.
+// - The resulting JSON contains the expected fields ("nonce" and "ciphertext").
+// - Data can be unmarshaled and decrypted back to the original plaintext.
 func TestDecrypt(t *testing.T) {
-	// Example symmetric key (should be 32 bytes for HS256)
 	key := "my_secret_key"
 	cm := NewCryptoManager(key)
 
