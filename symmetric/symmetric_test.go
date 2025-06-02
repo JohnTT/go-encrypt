@@ -6,14 +6,14 @@ import (
 	"testing"
 )
 
-// TestDecrypt verifies the encryption and decryption process of CryptoManager.
+// TestDecrypt verifies the encryption and decryption process of SymmetricCrypter.
 // It checks that:
 // - Data can be encrypted and marshaled to JSON.
 // - The resulting JSON contains the expected fields ("nonce" and "ciphertext").
 // - Data can be unmarshaled and decrypted back to the original plaintext.
 func TestDecrypt(t *testing.T) {
 	key := "my_secret_key"
-	cm := NewCryptoManager(key)
+	cm := NewSymmetricCrypter(key)
 
 	// Create a new token object
 	plainText := "my_access_token"

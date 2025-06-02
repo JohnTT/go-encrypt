@@ -10,22 +10,22 @@ import (
 	"io"
 )
 
-// CryptoManager manages symmetric encryption and decryption operations
+// SymmetricCrypter manages symmetric encryption and decryption operations
 // using AES-GCM. The encryption key is derived from a passphrase.
-type CryptoManager struct {
+type SymmetricCrypter struct {
 	key []byte
 }
 
-// NewCryptoManager creates a new CryptoManager instance.
+// NewSymmetricCrypter creates a new SymmetricCrypter instance.
 // The provided key string is hashed using SHA-256 to produce a 32-byte key.
-func NewCryptoManager(key string) *CryptoManager {
+func NewSymmetricCrypter(key string) *SymmetricCrypter {
 	hash := sha256.Sum256([]byte(key))
-	return &CryptoManager{key: hash[:]}
+	return &SymmetricCrypter{key: hash[:]}
 }
 
 // Encrypt encrypts the given plaintext using AES-GCM.
 // It returns an EncryptedData struct containing the nonce and ciphertext.
-func (c *CryptoManager) Encrypt(plaintext []byte) (*EncryptedData, error) {
+func (c *SymmetricCrypter) Encrypt(plaintext []byte) (*EncryptedData, error) {
 	block, err := aes.NewCipher(c.key)
 	if err != nil {
 		return nil, err
@@ -44,7 +44,7 @@ func (c *CryptoManager) Encrypt(plaintext []byte) (*EncryptedData, error) {
 
 // Decrypt decrypts the provided EncryptedData using AES-GCM.
 // It returns the original plaintext if decryption is successful.
-func (c *CryptoManager) Decrypt(data EncryptedData) ([]byte, error) {
+func (c *SymmetricCrypter) Decrypt(data EncryptedData) ([]byte, error) {
 	block, err := aes.NewCipher(c.key)
 	if err != nil {
 		return nil, err
